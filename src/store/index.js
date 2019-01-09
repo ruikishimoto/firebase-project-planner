@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, compose } from "redux";
-// import thunk from "redux-thunk";
-import rootReducer from "./reducers";
+import thunk from "redux-thunk";
+import { reduxFirestore, getFirestore } from "redux-firestore";
+import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
 
-// const middleware = [thunk];
-const middleware = [];
+import rootReducer from "./reducers";
+import firebase from "../config/firebase.config";
+const middleware = [thunk.withExtraArgument(getFirestore)];
 
 // the below is so that when redux dev tools is not avaialable
 // on browser, it falls back to normal compose
@@ -12,8 +14,12 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
   : compose;
 
-const enhancer = composeEnhancers(applyMiddleware(...middleware));
+const enhancer = composeEnhancers(
+  applyMiddleware(...middleware),
+  reduxFirestore(firebase)
+);
 
 const store = createStore(rootReducer, enhancer);
+// const store = enhancer(rootReducer);
 
 export default store;
