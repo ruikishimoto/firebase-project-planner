@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { reduxFirestore, getFirestore } from "redux-firestore";
-import { getFirebase } from "react-redux-firebase";
+import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
 
 import rootReducer from "./reducers";
 import firebase from "../config/firebase.config";
@@ -16,6 +16,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 
 const enhancer = composeEnhancers(
   applyMiddleware(...middleware),
+  reactReduxFirebase(firebase),
   reduxFirestore(firebase)
 );
 
