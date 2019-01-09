@@ -1,6 +1,10 @@
 import { CREATE_PROJECT, CREATE_PROJECT_ERROR } from "../types";
 
-export const createProject = project => (dispatch, getState, getFirestore) => {
+export const createProject = project => (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
   // make async calls to database
   const firestore = getFirestore();
   firestore
