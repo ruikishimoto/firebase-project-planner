@@ -1,4 +1,4 @@
-import { LOGIN_ERROR, LOGIN_SUCCESS } from "../types";
+import { LOGIN_ERROR, LOGIN_SUCCESS, SIGNOUT_SUCCESS } from "../types";
 
 const initialState = {
   authError: null
@@ -16,6 +16,8 @@ export default (state = initialState, action) => {
         ...state,
         authError: null
       };
+    case SIGNOUT_SUCCESS:
+      return state;
     default:
       return state;
   }
