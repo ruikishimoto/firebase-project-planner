@@ -16,11 +16,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 
 const enhancer = composeEnhancers(
   applyMiddleware(...middleware),
-  reactReduxFirebase(firebase),
+  reactReduxFirebase(firebase, { attachAuthIsReady: true }),
   reduxFirestore(firebase)
 );
 
 const store = createStore(rootReducer, enhancer);
-// const store = enhancer(rootReducer);
 
 export default store;
