@@ -14,13 +14,15 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
   : compose;
 
+const rrfConfig = {
+  useFirestoreForProfile: true,
+  userProfile: "users",
+  attachAuthIsReady: true
+};
+
 const enhancer = composeEnhancers(
   applyMiddleware(...middleware),
-  reactReduxFirebase(firebase, {
-    useFirestoreForProfile: true,
-    userProfile: "users",
-    attachAuthIsReady: true
-  }),
+  reactReduxFirebase(firebase, rrfConfig),
   reduxFirestore(firebase)
 );
 

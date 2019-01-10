@@ -7,13 +7,15 @@ export const createProject = project => (
 ) => {
   // make async calls to database
   const firestore = getFirestore();
+  const state = getState();
+  const { profile, auth } = state.firebase;
   firestore
     .collection("projects")
     .add({
       ...project,
-      authorFirstName: "Somefirst",
-      authorLastName: "Somelast",
-      authorId: 12345,
+      authorFirstName: profile.firstName,
+      authorLastName: profile.lastName,
+      authorId: auth.uid,
       createdAt: new Date()
     })
     .then(() => {
